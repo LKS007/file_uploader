@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('admin/id', 'AdminController@show');
+Route::get('admin/authorization', 'AdminController@authorization');
+
+Route::group(['prefix' => 'admin'], function(){
+    Route::resource('videos', 'VideoController');
+});
+

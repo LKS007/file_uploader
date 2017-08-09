@@ -4,13 +4,27 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call('UserTableSeeder');
+
+        $this->command->info('YEAH! You create admin!');
     }
+}
+
+class UserTableSeeder extends Seeder {
+
+  public function run()
+  {
+    //DB::table('users')->delete();
+
+    DB::table('users')->insert([
+      'email' => 'admin@admin.com',
+      'first_name' => 'Leonid',
+      'last_name' => 'Kamenev',
+      'role' => 'A',
+      'password_hash' => bcrypt('secret'),
+    ]);
+  }
+
 }
