@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('admin/id', 'AdminController@show');
-Route::get('admin/authorization', 'AdminController@authorization');
+Route::match(['get', 'post'], 'admin/authorization', 'AdminController@authorization');
 
 Route::group(['prefix' => 'admin'], function(){
     Route::resource('videos', 'VideoController');

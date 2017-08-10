@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -22,8 +23,11 @@ class AdminController extends Controller
     //echo "HEY!!!";
   }
 
-  public function authorization()
+  public function authorization(Request $request)
   {
-    //echo "Authorization";
+    if ($request->isMethod('post')) {
+      echo "check here";
+    }
+    return view('admin.authorization');
   }
 }

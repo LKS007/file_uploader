@@ -11,6 +11,12 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('my_auth');
+    }
+
     public function index()
     {
         return view('video.index', ['name' => 'Leonid']);
