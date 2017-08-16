@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder {
       'first_name' => 'Leonid',
       'last_name' => 'Kamenev',
       'role' => 'A',
-      'password_hash' => bcrypt('secret'),
+      'password' => bcrypt('secret'),
     ]);
   }
 

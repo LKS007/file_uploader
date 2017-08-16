@@ -13,21 +13,19 @@ class AdminController extends Controller
    * @param  int  $id
    * @return Response
    */
+
+  public function __construct()
+  {
+    $this->middleware('my_auth');
+  }
+
   public function show($id)
   {
     return view('admin.profile', ['user' => User::findOrFail($id)]);
   }
 
-  public function view()
+  public function dashboard()
   {
-    //echo "HEY!!!";
-  }
-
-  public function authorization(Request $request)
-  {
-    if ($request->isMethod('post')) {
-      echo "check here";
-    }
-    return view('admin.authorization');
+    return view('admin.dashboard');
   }
 }

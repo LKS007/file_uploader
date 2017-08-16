@@ -16,9 +16,13 @@ Route::get('/', function () {
 });
 
 Route::get('admin/id', 'AdminController@show');
-Route::match(['get', 'post'], 'admin/authorization', 'AdminController@authorization');
+Route::get('admin/', 'AdminController@dashboard')->name('admin');
 
 Route::group(['prefix' => 'admin'], function(){
     Route::resource('videos', 'VideoController');
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
