@@ -51,6 +51,7 @@ class VideoController extends Controller
      */
     public function show($id)
     {
+        echo "hey";
         //
     }
 
