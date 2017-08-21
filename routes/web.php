@@ -22,20 +22,16 @@ Route::get('/', function () {
 Route::get('admin/id', 'AdminController@show');
 Route::get('admin/', 'AdminController@dashboard')->name('admin');
 
-Route::group(['prefix' => 'admin'], function(){
+/*Route::group(['prefix' => 'admin'], function(){
     Route::resource('videos', 'VideoController');
-});
+});*/
 
 Route::group(['prefix' => 'admin'], function(){
     Route::resource('files', 'FileController');
 });
 
 Route::get('admin/files/{file}/download', 'FileController@download')->name('files.download');
-
-//Route::post('/api/v1/employees', 'FileController@create');
-//Route::get('/api/v1/employees', 'FileController@show');
-
-
+Route::get('admin/files/generate_files', 'FileController@generate_files')->name('files.generate_files');
 
 Auth::routes();
 

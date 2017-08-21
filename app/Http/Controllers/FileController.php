@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Mail;
 use Session;
 
 class FileController extends Controller
@@ -20,6 +21,10 @@ class FileController extends Controller
 
     public function index()
     {
+        /*$faker = Faker\Factory::create();
+        print_r($faker->name);
+        print_r($faker->address);
+        print_r($faker->text);*/
         $files = Myfile::all();
         return view('files.index',['files' => $files]);
     }
@@ -48,6 +53,13 @@ class FileController extends Controller
 
             $new_file->save();
             Storage::disk('local')->put($new_file->file_path,  File::get($file));
+
+            $data = array( 'email' => $request->input('uploader_email'), 'from' => 'leonid.kamenev2017@yandex.ru', 'from_name' => 'Leonid' );
+
+            Mail::send( 'email.welcome', $data, function( $message ) use ($data)
+            {
+                $message->to( $data['email'] )->from( $data['from'], $data['from_name'] )->subject( 'We have you file!!' );
+            });
 
             if (isset($request->FrontReq)) {
                 return json_encode(array('status' => 'ok', 'message' => 'You file was upload'));
@@ -107,5 +119,13 @@ class FileController extends Controller
         $file = Myfile::find($id);
         $path = storage_path('app/' . $file->file_path);
         return response()->download($path);
+    }
+
+    public function generate_files()
+    {
+        $faker = Faker\Factory::create();
+        print_r($faker->name);
+        print_r($faker->address);
+        print_r($faker->text);
     }
 }
