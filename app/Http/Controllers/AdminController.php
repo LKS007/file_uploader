@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -26,6 +28,8 @@ class AdminController extends Controller
 
   public function dashboard()
   {
-    return view('admin.dashboard');
+    $user = User::find(Auth::id());
+    //print_r($user);
+    return view('admin.dashboard', ['user' => $user]);
   }
 }

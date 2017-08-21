@@ -12,6 +12,27 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .my_own_button {
+      margin-top: 10px;
+    }
+
+    .my_own_form_class {
+        display: inline-block;
+    }
+    .my_own_navbar_class {
+        float: left;
+        margin: 7px 0px;
+        padding: 5px 15px;
+    }
+    .flash-message {
+        display: block;
+        position: fixed;
+        z-index: 1003;
+        width: 100%
+    }
+    </style>
 </head>
 <body>
 
@@ -37,8 +58,19 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        Front End
                     </a>
+
+                    <a class="navbar-brand" href="{{ URL::route('files.index') }}">
+                        All Files
+                    </a>
+
+                    <a class="my_own_navbar_class btn btn-small btn-success" href="{{ URL::route('files.create') }}">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Add new file
+                    </a>
+
+
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -56,7 +88,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->first_name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">

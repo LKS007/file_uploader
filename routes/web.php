@@ -26,8 +26,14 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('videos', 'VideoController');
 });
 
-Route::post('/api/v1/employees', 'FileController@create');
-Route::get('/api/v1/employees', 'FileController@show');
+Route::group(['prefix' => 'admin'], function(){
+    Route::resource('files', 'FileController');
+});
+
+Route::get('admin/files/{file}/download', 'FileController@download')->name('files.download');
+
+//Route::post('/api/v1/employees', 'FileController@create');
+//Route::get('/api/v1/employees', 'FileController@show');
 
 
 
