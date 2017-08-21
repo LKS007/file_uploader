@@ -1,11 +1,4 @@
 app.controller('employeesController', function($scope, $http, API_URL) {
-    //retrieve employees listing from API
-    /*$http.get(API_URL + "employees")
-            .success(function(response) {
-                $scope.employees = response;
-            });
-    */
-    //show modal form
     $scope.toggle = function(modalstate, id) {
         $scope.modalstate = modalstate;
 
@@ -34,50 +27,43 @@ app.controller('employeesController', function($scope, $http, API_URL) {
         console.log($scope.frmEmployees.file);
     }; 
 
+    var formdata = new FormData();
+    $scope.getTheFiles = function ($files) {
+        angular.forEach($files, function (value, key) {
+            formdata.append('new_file', value);
+        });
+    };
+
     //save new record / update existing record
     $scope.save = function(modalstate, id) {
-        var url = API_URL + "employees";
-
-        console.log($scope.employee.file);
-        
-        //append employee id to the URL if the form is in edit mode
+        //var url = API_URL + "employees";
+        var url = API_URL;
+        formdata.append('uploader_email', $scope.employee.email);
+        formdata.append('FrontReq', 'Y');
         if (modalstate === 'edit'){
             url += "/" + id;
         }
-        console.log($scope.employee.file);
+        
         $http({
             method: 'POST',
             url: url,
-            data: $.param($scope.employee),
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function(response) {
-            console.log(response);
-            $scope.my_answer = response;
-            //location.reload();
+            data: formdata,
+            headers: {'Content-Type': undefined }
+        }).success(function(response) {            
+            $scope.response_status = response.status;
+            if ($scope.response_status == 'ok') {
+                $scope.my_answer = response.message;
+            }
+            if ($scope.response_status == 'error') {
+                $scope.my_error = response.message;
+                setTimeout(function(){
+                    location.reload();        
+                }, 2000);
+            }
+            
         }).error(function(response) {
             console.log(response);
             alert('This is embarassing. An error has occured. Please check the log for details');
         });
-    }
-
-    //delete record
-    $scope.confirmDelete = function(id) {
-        var isConfirmDelete = confirm('Are you sure you want this record?');
-        if (isConfirmDelete) {
-            $http({
-                method: 'DELETE',
-                url: API_URL + 'employees/' + id
-            }).
-                    success(function(data) {
-                        console.log(data);
-                        location.reload();
-                    }).
-                    error(function(data) {
-                        console.log(data);
-                        alert('Unable to delete');
-                    });
-        } else {
-            return false;
-        }
     }
 });

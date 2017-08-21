@@ -61,6 +61,7 @@
                         Front End
                     </a>
 
+                    @if (!Auth::guest())
                     <a class="navbar-brand" href="{{ URL::route('files.index') }}">
                         All Files
                     </a>
@@ -69,6 +70,7 @@
                         <i class="glyphicon glyphicon-plus"></i>
                         Add new file
                     </a>
+                    @endif
 
 
                 </div>

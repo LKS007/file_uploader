@@ -1,59 +1,24 @@
 <!DOCTYPE html>
 <html lang="en-US" ng-app="employeeRecords">
     <head>
-        <title>Laravel 5 AngularJS CRUD Example</title>
+        <title>File Uploader</title>
 
         <!-- Load Bootstrap CSS -->
         <link href="<?= asset('css/app.css') ?>" rel="stylesheet">        
     </head>
     <body>
-        <h2>Employees Database</h2>
-        <div  ng-controller="employeesController">
-
-            <!-- Table-to-load-the-data Part -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Contact No</th>
-                        <th>Position</th>
-                        <th><button id="btn-add" class="btn btn-primary btn-xs" ng-click="toggle('add', 0)">Add New Employee</button></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="employee in employees">
-                        <td>{{  employee.id }}</td>
-                        <td>{{ employee.name }}</td>
-                        <td>{{ employee.email }}</td>
-                        <td>{{ employee.contact_number }}</td>
-                        <td>{{ employee.position }}</td>
-                        <td>
-                            <button class="btn btn-default btn-xs btn-detail" ng-click="toggle('edit', employee.id)">Edit</button>
-                            <button class="btn btn-danger btn-xs btn-delete" ng-click="confirmDelete(employee.id)">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- End of Table-to-load-the-data Part -->
-            <!-- Modal (Pop up when detail button clicked) -->
-
+        <h2> Download Your file </h2>
+        <div  ng-controller="employeesController" class="my_own_controller_div">
+            <div ng-if="response_status == 'ok'" class="my_own__complete_div">
+                <span>Amazing! It Work!</span> 
+                {{my_answer}}
+            </div>
+            <div ng-hide="{{response_status == 'ok'}}">
             <form name="frmEmployees" class="form-horizontal" novalidate="">
-
-                <div class="form-group error">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Name</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control has-error" id="name" name="name" placeholder="Fullname" value="{{name}}" 
-                        ng-model="employee.name" ng-required="true">
-                        <span class="help-inline" 
-                        ng-show="frmEmployees.name.$invalid && frmEmployees.name.$touched">Name field is required</span>
-                    </div>
-                </div>
-
+                
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
-                    <div class="col-sm-9">
+                    <label for="inputEmail3" class="col-sm-1 control-label">Email</label>
+                    <div class="col-sm-6">
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" value="{{email}}" 
                         ng-model="employee.email" ng-required="true">
                         <span class="help-inline" 
@@ -61,40 +26,19 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Contact Number</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Contact Number" value="{{contact_number}}" 
-                        ng-model="employee.contact_number" ng-required="true">
-                    <span class="help-inline" 
-                        ng-show="frmEmployees.contact_number.$invalid && frmEmployees.contact_number.$touched">Contact number field is required</span>
-                    </div>
+                <div  class="my_own_buttons_div">
+                    <input type="file" class="my_own_input_file" name="new_file" ng-files="getTheFiles($files)" ng-model="employee.new_file" required valid-file/>
+                    
+
+                    <button type="button" class="btn btn-primary control-label" id="btn-save" ng-click="save(modalstate, id)" ng-disabled="frmEmployees.$invalid">Save changes</button>
                 </div>
-
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-3 control-label">Position</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="position" name="position" placeholder="Position" value="{{position}}" 
-                        ng-model="employee.position" ng-required="true">
-                    <span class="help-inline" 
-                        ng-show="frmEmployees.position.$invalid && frmEmployees.position.$touched">Position field is required</span>
-                    </div>
-                </div>
-
-                <input type="file" name="file" ng-model="employee.file" required valid-file/>
-
-                <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id)" ng-disabled="frmEmployees.$invalid">Save changes</button>
-
             </form>
-            
-            <div ng-if="my_answer">
-                {{my_answer}}
             </div>
-
-        </div>
-
-
-    
+            
+            <div ng-if="my_error" class="my_own_danger_zone">
+                {{my_error}}
+            </div>
+        </div>    
     
         <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
         <script src="<?= asset('app/lib/angular/angular.min.js') ?>"></script>
