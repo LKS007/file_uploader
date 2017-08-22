@@ -21,10 +21,6 @@ class FileController extends Controller
 
     public function index()
     {
-        /*$faker = Faker\Factory::create();
-        print_r($faker->name);
-        print_r($faker->address);
-        print_r($faker->text);*/
         $files = Myfile::all();
         return view('files.index',['files' => $files]);
     }
@@ -123,9 +119,6 @@ class FileController extends Controller
 
     public function generate_files()
     {
-        $faker = Faker\Factory::create();
-        print_r($faker->name);
-        print_r($faker->address);
-        print_r($faker->text);
+        
     }
 }

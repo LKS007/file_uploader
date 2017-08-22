@@ -6,9 +6,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $this->call('UserTableSeeder');
 
-        $this->command->info('YEAH! You create admin!');
+      $this->call('UserFakerSeeder');
+      //$this->call('UserTableSeeder');
+      $this->call('FilesFakerSeeder');
+
+        //$this->command->info('YEAH! You create admin!');
     }
 }
 
