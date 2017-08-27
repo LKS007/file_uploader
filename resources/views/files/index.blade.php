@@ -11,6 +11,11 @@
 @if (count($files) == 0)
   You don't have a files!
 @else
+
+  <div class="my_own_pagination_container">
+    <?php echo $files->render(); ?>
+  </div>
+
   <table class="table table-striped table-bordered">
       <thead>
           <tr>
@@ -44,6 +49,10 @@
         @endforeach
       </tbody>
   </table>
+  <div class="my_own_pagination_container">
+    <?php echo $files->render(); ?>
+  </div>
 @endif
 </div>
 @endsection
+

@@ -32,6 +32,9 @@
         z-index: 1003;
         width: 100%
     }
+    .my_own_pagination_container {
+        text-align: center;
+    }
     </style>
 </head>
 <body>

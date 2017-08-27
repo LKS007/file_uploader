@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 //use Storage;
 use App\File as Myfile;
+//use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,9 @@ class FileController extends Controller
 
     public function index()
     {
-        $files = Myfile::all();
+        //$files = Myfile::all()->paginate(15);
+        //$files = DB::table('files')->paginate(15);
+        $files = Myfile::paginate(15);
         return view('files.index',['files' => $files]);
     }
 
