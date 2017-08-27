@@ -20,6 +20,10 @@
   margin: 10px 20px;
 }
 
+.my_own_main_contant h2{
+  text-align: center;
+}
+
 .my_own_controller_div .form-horizontal .form-group {
   margin-left: 0px;
   margin-right: 0px;

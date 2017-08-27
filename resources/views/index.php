@@ -7,6 +7,7 @@
         <link href="<?= asset('css/app.css') ?>" rel="stylesheet">        
     </head>
     <body>
+    <div class="my_own_main_contant">
         <h2> Download Your file </h2>
         <div  ng-controller="employeesController" class="my_own_controller_div">
             <div ng-if="response_status == 'ok'" class="my_own__complete_div">
@@ -38,8 +39,8 @@
             <div ng-if="my_error" class="my_own_danger_zone">
                 {{my_error}}
             </div>
-        </div>    
-    
+        </div>
+    </div>
         <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
         <script src="<?= asset('app/lib/angular/angular.min.js') ?>"></script>
         <script src="<?= asset('js/app.js') ?>"></script>
